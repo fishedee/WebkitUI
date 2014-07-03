@@ -1,10 +1,15 @@
 #include <QApplication>
 #include "window.h"
+#include "application.h"
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    Window window;
-    window.show();
-    a.setActiveWindow(window.m_window);
+    Application a(argc, argv);
     return a.exec();
 }
+/*
+int main(int argc, char *argv[])
+{
+    Window wind(argc,argv);
+    wind.show();
+}
+*/

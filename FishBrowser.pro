@@ -11,14 +11,17 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = FishBrowser
 TEMPLATE = app
 
-
 SOURCES += main.cpp \
     cookiejar.cpp \
     networkaccessmanager.cpp \
     application.cpp \
     window.cpp \
     webpage.cpp \
-    config.cpp
+    config.cpp \
+    util.cpp \
+    url.cpp \
+    terminal.cpp \
+    commandline.cpp
 
 HEADERS  += \
     cookiejar.h \
@@ -26,6 +29,16 @@ HEADERS  += \
     networkaccessmanager.h \
     application.h \
     webpage.h \
-    config.h
+    config.h \
+    util.h \
+    consts.h \
+    url.h \
+    terminal.h \
+    commandline.h
 
 FORMS    +=
+
+OTHER_FILES +=
+
+RESOURCES += \
+    fishbrowser.qrc
