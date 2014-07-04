@@ -10,4 +10,17 @@ WebkitUI
 2.开发简单，仅用html,css,js就能构成WebApp
 3.性能高效，支持静态页面放在本地的方式来构造WebApp
 </pre>
-![Image text](http://github.com/fishedee/WebkitUI/blob/master/test/test2/static/img/comm/add.png) 
+<h3>运行示例</h3>
+![示例1](http://github.com/fishedee/WebkitUI/blob/master/test/test2/static/img/comm/add.png) 
+![示例2](http://github.com/fishedee/WebkitUI/blob/master/test/test2/static/img/comm/add.png) 
+<h3>代码示例</h3>
+<pre>
+var window = application.createWindow();
+window.setSize(624,800);
+window.setPosition(100,200);
+window.load("static/index.html");
+window.onClose( function(){
+	application.exit(0);
+});
+window.show();
+</pre>
