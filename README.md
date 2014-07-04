@@ -10,4 +10,4 @@ WebkitUI
 2.开发简单，仅用html,css,js就能构成WebApp
 3.性能高效，支持静态页面放在本地的方式来构造WebApp
 </pre>
-<img src="test.jpg"/>
+![Image text](http://github.com/fishedee/WebkitUI/blob/master/test/test2/static/img/comm/add.png) 
