@@ -11,8 +11,8 @@ WebkitUI
 3.性能高效，支持静态页面放在本地的方式来构造WebApp
 </pre>
 <h3>运行示例</h3>
-![示例1](http://github.com/fishedee/WebkitUI/blob/master/test/test2/static/img/comm/add.png) 
-![示例2](http://github.com/fishedee/WebkitUI/blob/master/test/test2/static/img/comm/add.png) 
+![示例1](http://github.com/fishedee/WebkitUI/blob/master/brief/test1.png) 
+![示例2](http://github.com/fishedee/WebkitUI/blob/master/brief/test2.png) 
 <h3>代码示例</h3>
 <pre>
 var window = application.createWindow();
