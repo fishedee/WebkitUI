@@ -10,16 +10,16 @@ Application* Application::m_instance;
 Application::Application(int argc, char *argv[],QObject *parent) :
     QObject(parent),m_application(argc,argv){
     bool isOk;
-	//初始化变量
+	//init var
 	m_instance = this;
 	m_isRun = true;
 	m_retCode = 0;
     m_cookiejar = NULL;
-    //初始化配置
+    //init config
     m_globalConfig = new Config(this);
-	//初始化CommandLine
+	//init CommandLine
 	CommandLine::instance()->init(argc,argv);
-	//初始化脚本
+	//init script file
     if( argc < 2 ){
         Terminal::instance()->cerr("Please Input Script File");
         _exit(1);
@@ -31,7 +31,7 @@ Application::Application(int argc, char *argv[],QObject *parent) :
         _exit(1);
         return;
 	}
-    //初始化libraryPath
+    //init libraryPath
 	QString baseUrl;
     isOk = Url::dirname( argv[1] ,baseUrl );
     if( isOk != true ){
@@ -45,11 +45,11 @@ Application::Application(int argc, char *argv[],QObject *parent) :
         _exit(1);
         return;
     }
-	//初始化WebPage
+	//init WebPage
     m_page = new WebPage( );
     connect(m_page, SIGNAL(javaScriptWindowObjectCleared()),this,SLOT(onInitialized()));
-    //执行空白页面
-    //!important 必须先挂载所有回调，才开始载入页面
+    //init blank page
+    //!important please first set callback then set page
     m_page->setBlankContent();
 }
 Application::~Application(){
@@ -77,11 +77,11 @@ QObject* Application::_createWindow( ){
 }
 void Application::onInitialized(){
     qDebug() << "Application - onInitialized";
-    //在js环境中初始化本对象
+    //init appliaction object in js environment
     m_page->addToJavaScriptWindowObject("application", this);
-    //在js环境中初始化js环境
+    //init  js environment
     m_page->evaluateJavaScript(Util::readResourceFileUtf8(":/bootstrap.js"));
-    //在js环境中输入js环境
+    //init  js environment
     m_page->evaluateJavaScript(m_scriptSourceCode);
 }
 void Application::_exit( int retCode ){

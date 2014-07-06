@@ -10,7 +10,7 @@
 #include "util.h"
 CustomWindow::CustomWindow(QWebView* view , QWidget*parent):
     QMainWindow(parent){
-    //设置布局
+    //set windows layout
     QWidget* widget = new QWidget(this);
     QGridLayout *gridLayout = new QGridLayout(widget);
     gridLayout->addWidget(view);
@@ -87,8 +87,8 @@ void Window::setPosition(int left , int top){
 }
 void Window::onInitialized(){
     qDebug() << "Window - onInitialized";
-    //在js环境中初始化本对象
+    //init appliaction object in js environment
     m_page->addToJavaScriptWindowObject("application", Application::instance());
-    //在js环境中初始化js环境
+    //init  js environment
     m_page->evaluateJavaScript(Util::readResourceFileUtf8(":/bootstrap.js"));
 }

@@ -6,19 +6,19 @@
 #include "system.h"
 #include "application.h"
 #include "networkaccessmanager.h"
-WebPage::WebPage(QWidget *parent ) :
+WebPage::WebPage(QWidget *parent ):
     QWebPage(parent){
-    //初始化变量
+    //init var
     Config* config = Application::instance()->config();
     CookieJar* cookiejar = Application::instance()->cookiejar();
 
-    //设置网络控制器
+	//init network
     NetworkAccessManager* networkaccessmanager = new NetworkAccessManager(config,this);
     if( cookiejar != NULL )
         networkaccessmanager->setCookieJar(cookiejar);
     setNetworkAccessManager(networkaccessmanager);
 
-    //设置特性属性
+    //init attribute
     setForwardUnsupportedContent(true);
     settings()->setAttribute(QWebSettings::AutoLoadImages, true);
     settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows, false);
@@ -38,14 +38,14 @@ WebPage::WebPage(QWidget *parent ) :
     settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     //settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
 
-    //设置显示属性
+    //init show attribute
     QPalette palette = this->palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
     setPalette(palette);
     //mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
     //mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
 
-    //初始化回调
+    //init callback
     connect(mainFrame(), SIGNAL(javaScriptWindowObjectCleared()),SIGNAL(javaScriptWindowObjectCleared()));
 }
 void WebPage::setBlankContent(){
