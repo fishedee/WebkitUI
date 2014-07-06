@@ -6,8 +6,17 @@
         <meta name="description" content="Fresh Bottom Slide Out Menu with jQuery" />
         <meta name="keywords" content="jQuery, navigation, CSS3, menu" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-    </head>
+		<style>
+			.move{
+				height:50px;
+				border:1px solid black;
+			}
+		</style>
+	</head>
     <body>
+		<div class="move">
+			移动我就移动窗口
+		</div>
         <div class="container">
             <ul id="menu">
                 <li>
@@ -69,6 +78,39 @@
                 }
             );
         });
+		$(function(){
+			var position = {top:0,left:0};
+			var position2 ;
+			var isDown = false;
+			$(".move").mousedown( function(event){
+				console.log("mousedown");
+				position.top = fishwindow.getCursorPos().y;
+				position.left = fishwindow.getCursorPos().x;
+				position2 = fishwindow.getPosition();
+				isDown = true;
+			});
+			$(".move").mousemove( function(event){
+				
+				if( isDown == false )
+					return ;
+				var curposition = {top:0,left:0};
+				curposition.top = fishwindow.getCursorPos().y;
+				curposition.left = fishwindow.getCursorPos().x;
+				console.log("mousemove " + position.left +","+position.top +":" + curposition.left +","+curposition.top );
+				
+				fishwindow.setPosition(
+					position2.left + curposition.left - position.left,
+					position2.top + curposition.top - position.top
+				);
+				console.log(position2.left +","+curposition.left+","+position.left);
+				position = curposition;
+				position2 = fishwindow.getPosition();
+			});
+			$(".move").mouseup( function(){
+				console.log("mouseup");
+				isDown = false;
+			});
+		});
         </script>
     </body>
 </html>

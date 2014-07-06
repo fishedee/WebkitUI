@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QWebView>
 #include <QMainWindow>
+#include <QVariantMap>
 #include "webpage.h"
 class CustomWindow:public QMainWindow{
     Q_OBJECT
@@ -13,7 +14,7 @@ public:
     void setSize( int width , int height );
     void setPosition(int left , int top);
     void closeEvent ( QCloseEvent * );
-
+    QVariantMap getPosition();
 signals:
     void myCloseEvent();
 };
@@ -31,6 +32,8 @@ public slots:
     void show();
     void setSize( int width , int height );
     void setPosition(int left , int top);
+    QVariantMap getCursorPos();
+    QVariantMap getPosition();
     void close();
     void minimum();
     void maximum();

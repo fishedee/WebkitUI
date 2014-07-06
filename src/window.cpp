@@ -6,6 +6,7 @@
 #include <QWebFrame>
 #include <QApplication>
 #include <QCloseEvent>
+#include <QCursor>
 #include "application.h"
 #include "util.h"
 CustomWindow::CustomWindow(QWebView* view , QWidget*parent):
@@ -19,7 +20,7 @@ CustomWindow::CustomWindow(QWebView* view , QWidget*parent):
     setContentsMargins(0,0,0,0);
     gridLayout->setContentsMargins(QMargins(0,0,0,0));
     setAttribute(Qt::WA_TranslucentBackground, true);
-    //setWindowFlags(Qt::FramelessWindowHint);
+    setWindowFlags(Qt::FramelessWindowHint);
 }
 void CustomWindow::setSize( int width , int height ){
     QRect rect = geometry();
@@ -28,6 +29,13 @@ void CustomWindow::setSize( int width , int height ){
 void CustomWindow::setPosition(int left , int top){
     QRect rect = geometry();
     setGeometry( left , top , rect.width() ,rect.height() );
+}
+QVariantMap CustomWindow::getPosition(){
+    QRect rect = geometry();
+    QVariantMap map;
+    map["left"] = rect.left();
+    map["top"] = rect.top();
+    return map;
 }
 void CustomWindow::closeEvent ( QCloseEvent * event ){
     emit myCloseEvent();
@@ -85,8 +93,21 @@ void Window::setSize( int width , int height ){
 void Window::setPosition(int left , int top){
     m_window->setPosition(left,top);
 }
+
+QVariantMap Window::getPosition(){
+    return m_window->getPosition();
+}
+QVariantMap Window::getCursorPos(){
+    QVariantMap map;
+    map["x"] = QCursor::pos().x();
+    map["y"] = QCursor::pos().y();
+    return map;
+}
+
 void Window::onInitialized(){
     qDebug() << "Window - onInitialized";
+    //init window
+     m_page->addToJavaScriptWindowObject("fishwindow", this);
     //init appliaction object in js environment
     m_page->addToJavaScriptWindowObject("application", Application::instance());
     //init  js environment
